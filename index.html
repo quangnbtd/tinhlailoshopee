@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Công Cụ Tính Giá Shopee Hiện Đại - Vũ Quang Ecommerce</title> {/* Thêm tên vào title */}
+    <style>
+        :root {
+            --primary-color: #ee4d2d;
+            --primary-color-dark: #d73210;
+            --success-color: #28a745;
+            --error-color: #dc3545;
+            --warning-color: #ffc107;
+            --text-color: #333;
+            --text-color-light: #555;
+            --text-color-footer: #6c757d; /* Màu chữ footer */
+            --border-color: #ddd;
+            --background-color: #f8f9fa;
+            --white: #fff;
+            --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            --border-radius: 8px;
+            --transition-speed: 0.3s;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+             scroll-behavior: smooth; /* Smooth scroll */
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column; /* Stack container and footer vertically */
+            justify-content: space-between; /* Push footer down */
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: var(--white);
+            padding: 30px 35px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            max-width: 500px;
+            width: 100%;
+            margin-top: 30px;
+            margin-bottom: 30px; /* Add space above footer */
+            flex-shrink: 0; /* Prevent container from shrinking */
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            font-size: 1.8em;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-color-light);
+            font-size: 0.95em;
+        }
+
+        input[type="number"],
+        input[type="text"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 1em;
+            transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+        }
+
+        input[type="number"]:focus,
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(238, 77, 45, 0.15);
+        }
+
+         input[type="checkbox"] {
+            margin-right: 8px;
+            vertical-align: middle;
+            width: 16px;
+            height: 16px;
+            accent-color: var(--primary-color);
+        }
+
+        .checkbox-label {
+            display: inline-flex; /* Align items vertically */
+            align-items: center;
+            font-weight: normal;
+            color: var(--text-color-light);
+            cursor: pointer;
+            user-select: none;
+             margin-bottom: 0;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color var(--transition-speed) ease, transform 0.1s ease;
+            margin-top: 25px;
+        }
+
+        button:hover {
+            background-color: var(--primary-color-dark);
+        }
+        button:active {
+            transform: scale(0.98);
+        }
+
+        #ketqua {
+            margin-top: 30px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            background-color: #fdfdfd;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(15px);
+            transition: opacity var(--transition-speed) ease, transform var(--transition-speed) ease, visibility var(--transition-speed) ease, border-color var(--transition-speed) ease;
+            position: relative;
+        }
+
+        #ketqua.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        #ketqua.result-positive {
+            border-left: 5px solid var(--success-color);
+            background-color: #f0fff4;
+        }
+        #ketqua.result-negative {
+            border-left: 5px solid var(--error-color);
+            background-color: #fff5f5;
+        }
+        #ketqua.result-negative::before {
+            content: '!';
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--error-color);
+            font-weight: bold;
+            font-size: 1.5em;
+            line-height: 1;
+            border: 2px solid var(--error-color);
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #ketqua.result-zero {
+            border-left: 5px solid var(--warning-color);
+            background-color: #fffcf0;
+        }
+
+
+        #ketqua p {
+            margin: 0;
+            font-size: 1.1em;
+            color: var(--text-color);
+            padding-right: 35px; /* Make space for potential icon */
+        }
+        #ketqua p strong {
+             font-weight: 600;
+        }
+
+        #loiNhuan {
+            font-weight: 700;
+            font-size: 1.4em;
+            margin-left: 5px;
+        }
+
+        #ketqua .positive { color: var(--success-color); }
+        #ketqua .negative { color: var(--error-color); }
+        #ketqua .zero { color: var(--warning-color); }
+
+        .error {
+            color: var(--error-color);
+            font-size: 0.85em;
+            margin-top: 5px;
+            height: 1.2em;
+        }
+
+        /* Footer Styling */
+        footer {
+            text-align: center;
+            padding: 20px 15px;
+            margin-top: auto; /* Pushes footer to bottom */
+            width: 100%;
+            font-size: 0.9em;
+            color: var(--text-color-footer);
+        }
+
+        footer p {
+            margin-bottom: 8px; /* Space between lines */
+        }
+
+        footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color var(--transition-speed) ease;
+        }
+
+        footer a:hover {
+            color: var(--primary-color-dark);
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Công Cụ Tính Lợi Nhuận Shopee</h1>
+
+    <div class="form-group">
+        <label for="giaNhap">Giá Nhập (VNĐ)</label>
+        <input type="number" id="giaNhap" placeholder="Ví dụ: 29700" required>
+        <div class="error" id="errorGiaNhap"></div>
+    </div>
+
+    <div class="form-group">
+        <label for="giaBan">Giá Bán Shopee (VNĐ)</label>
+        <input type="number" id="giaBan" placeholder="Ví dụ: 89000" required>
+        <div class="error" id="errorGiaBan"></div>
+    </div>
+
+    <div class="form-group">
+        <label for="phanTramQuangCao">% Quảng Cáo (trên Giá Bán)</label>
+        <input type="number" id="phanTramQuangCao" placeholder="Ví dụ: 18" step="0.1" required>
+         <div class="error" id="errorQuangCao"></div>
+    </div>
+
+     <div class="form-group">
+         <label class="checkbox-label" for="isMall">
+             <input type="checkbox" id="isMall">
+             <span>Gian hàng là Shopee Mall (+3% phí cố định)</span>
+         </label>
+    </div>
+
+    <button id="tinhToanBtn">Tính Lợi Nhuận</button>
+
+    <div id="ketqua">
+         <p><strong id="ketquaDescription"></strong><span id="loiNhuan"></span> VNĐ</p>
+    </div>
+</div>
+
+<footer>
+    <p>Công cụ được phát triển bởi <strong>Vũ Quang Ecommerce</strong>.</p>
+    <p>
+        Kết nối hợp tác: <a href="tel:0386473757">0386 473 757</a> |
+        Website: <a href="https://www.vuthanhquang.com/" target="_blank" rel="noopener noreferrer">vuthanhquang.com</a>
+    </p>
+</footer>
+
+<script defer>
+    const giaNhapInput = document.getElementById('giaNhap');
+    const giaBanInput = document.getElementById('giaBan');
+    const phanTramQuangCaoInput = document.getElementById('phanTramQuangCao');
+    const isMallCheckbox = document.getElementById('isMall');
+    const tinhToanBtn = document.getElementById('tinhToanBtn');
+    const ketquaDiv = document.getElementById('ketqua');
+    const ketquaDescriptionSpan = document.getElementById('ketquaDescription');
+    const loiNhuanSpan = document.getElementById('loiNhuan');
+
+    // Error message divs
+    const errorGiaNhap = document.getElementById('errorGiaNhap');
+    const errorGiaBan = document.getElementById('errorGiaBan');
+    const errorQuangCao = document.getElementById('errorQuangCao');
+
+    // --- Cost Rates (based on Selling Price) ---
+    const TYLE_PHI_CO_DINH = 0.10;
+    const TYLE_PHI_THANH_TOAN = 0.05;
+    const TYLE_THUE = 0.015;
+    const TYLE_PHI_MALL = 0.03;
+    const TYLE_VAT_QUANG_CAO = 0.10; // 10% VAT on Advertising Cost
+    const TYLE_CONTENTEXTRA = 0.03;
+    const TYLE_AFFILIATE_ADS = 0.15;
+    const TYLE_VOUCHER = 0.05;
+    const TYLE_HOAN_HUY = 0.02;
+    const TYLE_VAN_HANH = 0.10;
+    const TYLE_DONG_GOI = 0.01;
+    // ----------------------------------------------------
+
+    function formatCurrency(value) {
+        return Math.round(value).toLocaleString('vi-VN');
+    }
+
+    function tinhLoiNhuan() {
+        // 1. Clear previous state
+        errorGiaNhap.textContent = '';
+        errorGiaBan.textContent = '';
+        errorQuangCao.textContent = '';
+        ketquaDiv.classList.remove('active', 'result-positive', 'result-negative', 'result-zero');
+        ketquaDiv.style.visibility = 'hidden';
+        ketquaDiv.style.opacity = '0';
+
+
+        // 2. Get input values
+        const giaNhap = parseFloat(giaNhapInput.value);
+        const giaBan = parseFloat(giaBanInput.value);
+        const phanTramQuangCao = parseFloat(phanTramQuangCaoInput.value);
+        const isMall = isMallCheckbox.checked;
+
+        // 3. Validate Input
+        let isValid = true;
+        if (isNaN(giaNhap) || giaNhap < 0) {
+            errorGiaNhap.textContent = 'Vui lòng nhập giá nhập hợp lệ (số không âm).';
+            isValid = false;
+        }
+        if (isNaN(giaBan) || giaBan <= 0) {
+            errorGiaBan.textContent = 'Vui lòng nhập giá bán hợp lệ (số dương).';
+            isValid = false;
+        }
+         if (isNaN(phanTramQuangCao) || phanTramQuangCao < 0) {
+            errorQuangCao.textContent = 'Vui lòng nhập % quảng cáo hợp lệ (số không âm).';
+            isValid = false;
+        }
+
+        if (!isValid) {
+             ketquaDiv.classList.remove('active');
+             ketquaDiv.style.visibility = 'hidden';
+             ketquaDiv.style.opacity = '0';
+            return;
+        }
+
+        // 4. Calculate costs based on Selling Price (giaBan)
+        const phiCoDinh = giaBan * TYLE_PHI_CO_DINH;
+        const phiThanhToan = giaBan * TYLE_PHI_THANH_TOAN;
+        const thue = giaBan * TYLE_THUE;
+        const phiMall = isMall ? giaBan * TYLE_PHI_MALL : 0;
+        const contentextra = giaBan * TYLE_CONTENTEXTRA;
+        const affiliateAds = giaBan * TYLE_AFFILIATE_ADS;
+        const voucher = giaBan * TYLE_VOUCHER;
+        const hoanHuy = giaBan * TYLE_HOAN_HUY;
+        const chiPhiVanHanh = giaBan * TYLE_VAN_HANH;
+        const chiPhiDongGoi = giaBan * TYLE_DONG_GOI;
+
+        // Advertising cost and its VAT
+        const chiPhiQuangCao = giaBan * (phanTramQuangCao / 100);
+        const vatQuangCao = chiPhiQuangCao * TYLE_VAT_QUANG_CAO;
+
+        // 5. Calculate Total Costs
+        const tongChiPhiTruGiaNhap =
+            phiCoDinh + phiThanhToan + thue + phiMall +
+            chiPhiQuangCao + vatQuangCao + contentextra + affiliateAds +
+            voucher + hoanHuy + chiPhiVanHanh + chiPhiDongGoi;
+
+        const tongChiPhiBaoGomGiaGoc = tongChiPhiTruGiaNhap + giaNhap;
+
+        // 6. Calculate Profit
+        const loiNhuan = giaBan - tongChiPhiBaoGomGiaGoc;
+
+        // 7. Display Result
+        loiNhuanSpan.textContent = formatCurrency(loiNhuan);
+        loiNhuanSpan.className = '';
+
+        let resultClass = '';
+        let description = '';
+
+        if (loiNhuan > 0) {
+            resultClass = 'result-positive';
+            loiNhuanSpan.classList.add('positive');
+            description = 'Lợi nhuận ước tính';
+        } else if (loiNhuan < 0) {
+            resultClass = 'result-negative';
+            loiNhuanSpan.classList.add('negative');
+            description = 'Lỗ ước tính';
+        } else {
+            resultClass = 'result-zero';
+            loiNhuanSpan.classList.add('zero');
+            description = 'Hòa vốn ước tính';
+        }
+
+        ketquaDescriptionSpan.textContent = description + ': '; // Add colon for separation
+        ketquaDiv.classList.add(resultClass);
+
+        requestAnimationFrame(() => {
+             ketquaDiv.style.visibility = 'visible';
+             ketquaDiv.classList.add('active');
+         });
+    }
+
+    // --- Attach event listener ---
+    tinhToanBtn.addEventListener('click', tinhLoiNhuan);
+
+</script>
+
+</body>
+</html>
