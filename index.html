@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Công Cụ Tính Giá Shopee Tối Giản - Vũ Quang Ecommerce</title>
+    <title>Công Cụ Tính Lợi Nhuận Shopee - Vũ Quang Ecommerce</title>
     <style>
         :root {
-            --primary-color: #ee4d2d;
-            --primary-color-dark: #d73210;
-            --success-color: #28a745;
-            --error-color: #dc3545;
-            --warning-color: #ffc107;
-            --text-color: #333;
-            --text-color-light: #555;
-            --text-color-footer: #6c757d;
-            --border-color: #ddd;
-            --background-color: #f8f9fa;
-            --white: #fff;
-            --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            --border-radius: 8px;
+            --primary-color: #ff6200;
+            --primary-color-dark: #e05500;
+            --success-color: #22c55e;
+            --error-color: #ef4444;
+            --warning-color: #f59e0b;
+            --text-color: #1f2937;
+            --text-color-light: #6b7280;
+            --text-color-footer: #9ca3af;
+            --border-color: #e5e7eb;
+            --background-color: #f3f4f6;
+            --white: #ffffff;
+            --box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            --border-radius: 12px;
             --transition-speed: 0.3s;
         }
 
@@ -29,183 +29,199 @@
         }
 
         html {
-             scroll-behavior: smooth;
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
             line-height: 1.6;
-            background-color: var(--background-color);
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
             color: var(--text-color);
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
             align-items: center;
             min-height: 100vh;
             padding: 20px;
         }
 
         .container {
-            background-color: var(--white);
-            padding: 30px 35px;
+            background: var(--white);
+            padding: 40px;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
-            max-width: 500px;
+            max-width: 600px;
             width: 100%;
-            margin-top: 30px;
-            margin-bottom: 30px;
-            flex-shrink: 0;
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(to right, var(--primary-color), var(--primary-color-dark));
         }
 
         h1 {
             text-align: center;
             color: var(--primary-color);
-            /* Remove bottom margin from h1 if note is directly below */
+            font-size: 2rem;
+            font-weight: 700;
             margin-bottom: 10px;
-            font-size: 1.8em;
         }
 
-        /* Style for the note below h1 */
         .luu-y {
             text-align: center;
-            font-size: 0.9em;
+            font-size: 0.9rem;
             color: var(--text-color-light);
-            margin-bottom: 25px; /* Add back margin below the note */
-            font-style: italic; /* Make it italic */
+            margin-bottom: 30px;
+            font-style: italic;
+            background: #f8fafc;
+            padding: 10px;
+            border-radius: 8px;
         }
 
-
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             font-weight: 600;
-            color: var(--text-color-light);
-            font-size: 0.95em;
+            color: var(--text-color);
+            font-size: 1rem;
         }
 
         input[type="number"],
         input[type="text"] {
             width: 100%;
-            padding: 12px 15px;
+            padding: 14px 16px;
             border: 1px solid var(--border-color);
-            border-radius: 6px;
-            font-size: 1em;
-            transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: #f9fafb;
+            transition: all var(--transition-speed) ease;
         }
 
         input[type="number"]:focus,
         input[type="text"]:focus {
             outline: none;
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(238, 77, 45, 0.15);
+            box-shadow: 0 0 0 4px rgba(255, 98, 0, 0.15);
+            background: var(--white);
         }
 
-         input[type="checkbox"] {
-            margin-right: 8px;
-            vertical-align: middle;
-            width: 16px;
-            height: 16px;
+        input[type="checkbox"] {
+            margin-right: 10px;
+            width: 18px;
+            height: 18px;
             accent-color: var(--primary-color);
+            cursor: pointer;
         }
 
         .checkbox-label {
             display: inline-flex;
             align-items: center;
-            font-weight: normal;
+            font-weight: 500;
             color: var(--text-color-light);
             cursor: pointer;
-            user-select: none;
-            margin-bottom: 0;
+            font-size: 0.95rem;
         }
-         .checkbox-label span {
-             line-height: 1.2;
-         }
 
         button {
-            display: block;
             width: 100%;
-            padding: 14px;
-            background-color: var(--primary-color);
+            padding: 16px;
+            background: linear-gradient(45deg, var(--primary-color), var(--primary-color-dark));
             color: var(--white);
             border: none;
-            border-radius: 6px;
-            font-size: 1.1em;
+            border-radius: 8px;
+            font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: background-color var(--transition-speed) ease, transform 0.1s ease;
-            margin-top: 25px;
+            transition: all var(--transition-speed) ease;
+            margin-top: 20px;
         }
 
         button:hover {
-            background-color: var(--primary-color-dark);
+            background: linear-gradient(45deg, var(--primary-color-dark), var(--primary-color));
+            transform: translateY(-2px);
         }
+
         button:active {
             transform: scale(0.98);
         }
 
-        /* --- Direct Result Area Styling --- */
         #ketQuaTrucTiep {
-            margin-top: 25px;
-            padding: 15px 20px;
-            border-radius: var(--border-radius);
-            background-color: var(--background-color);
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 10px;
+            background: #f9fafb;
             border: 1px solid var(--border-color);
-            min-height: 2.5em;
             text-align: center;
-            font-size: 1.1em;
-            line-height: 1.5;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: all var(--transition-speed) ease;
         }
 
         #ketQuaTrucTiep.result-positive {
-            background-color: #f0fff4;
+            background: #ecfdf5;
             border-color: var(--success-color);
-        }
-        #ketQuaTrucTiep.result-negative {
-            background-color: #fff5f5;
-            border-color: var(--error-color);
-        }
-        #ketQuaTrucTiep.result-zero {
-             background-color: #fffcf0;
-            border-color: var(--warning-color);
+            color: var(--success-color);
         }
 
-        /* Color classes for the profit/loss number */
+        #ketQuaTrucTiep.result-negative {
+            background: #fef2f2;
+            border-color: var(--error-color);
+            color: var(--error-color);
+        }
+
+        #ketQuaTrucTiep.result-zero {
+            background: #fff7ed;
+            border-color: var(--warning-color);
+            color: var(--warning-color);
+        }
+
         .positive { color: var(--success-color); font-weight: 700; }
         .negative { color: var(--error-color); font-weight: 700; }
         .zero { color: var(--warning-color); font-weight: 700; }
 
         .error {
             color: var(--error-color);
-            font-size: 0.85em;
-            margin-top: 5px;
+            font-size: 0.85rem;
+            margin-top: 8px;
             min-height: 1.2em;
         }
 
-        /* Footer Styling */
         footer {
             text-align: center;
-            padding: 20px 15px;
+            padding: 20px;
             margin-top: auto;
             width: 100%;
-            font-size: 0.9em;
+            font-size: 0.9rem;
             color: var(--text-color-footer);
         }
-        footer p { margin-bottom: 8px; }
-        footer a { color: var(--primary-color); text-decoration: none; transition: color var(--transition-speed) ease; }
-        footer a:hover { color: var(--primary-color-dark); text-decoration: underline; }
 
+        footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color var(--transition-speed) ease;
+        }
+
+        footer a:hover {
+            color: var(--primary-color-dark);
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
-
 <div class="container">
     <h1>Công Cụ Tính Lợi Nhuận Shopee</h1>
-    <!-- === ADDED NOTE HERE === -->
-    <p class="luu-y">Lưu ý: Chi phí trừ đi chưa bao gồm phí vận hành, kho bãi, nhân sự, đóng gói v.v.. của nhà bán.</p>
+    <p class="luu-y">Lưu ý: Chi phí trừ đi chưa bao gồm phí vận hành, kho bãi, nhân sự, đóng gói...</p>
 
     <div class="form-group">
         <label for="giaNhap">Giá Nhập (VNĐ)</label>
@@ -222,23 +238,19 @@
     <div class="form-group">
         <label for="phanTramQuangCao">% Quảng Cáo (trên Giá Bán)</label>
         <input type="number" id="phanTramQuangCao" placeholder="Ví dụ: 18" step="0.1" required>
-         <div class="error" id="errorQuangCao"></div>
+        <div class="error" id="errorQuangCao"></div>
     </div>
 
-     <div class="form-group">
-         <label class="checkbox-label" for="isMall">
-             <input type="checkbox" id="isMall">
-             <span>Gian hàng là Shopee Mall</span>
-         </label>
+    <div class="form-group">
+        <label class="checkbox-label" for="isMall">
+            <input type="checkbox" id="isMall">
+            <span>Gian hàng là Shopee Mall </span>
+        </label>
     </div>
 
     <button id="tinhToanBtn">Tính Lợi Nhuận</button>
 
-    <!-- === RESULT AREA === -->
-    <div id="ketQuaTrucTiep">
-        <!-- Kết quả sẽ được hiển thị ở đây -->
-    </div>
-
+    <div id="ketQuaTrucTiep"></div>
 </div>
 
 <footer>
@@ -249,8 +261,7 @@
     </p>
 </footer>
 
-<script defer>
-    // --- JavaScript code remains the same as the previous version ---
+<script>
     const giaNhapInput = document.getElementById('giaNhap');
     const giaBanInput = document.getElementById('giaBan');
     const phanTramQuangCaoInput = document.getElementById('phanTramQuangCao');
@@ -335,8 +346,6 @@
     }
 
     tinhToanBtn.addEventListener('click', tinhLoiNhuan);
-
 </script>
-
 </body>
 </html>
