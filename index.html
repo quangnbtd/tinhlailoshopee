@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Công Cụ Tính Giá Shopee Hiện Đại - Vũ Quang Ecommerce</title>
+    <title>Công Cụ Tính Giá Shopee Tối Giản - Vũ Quang Ecommerce</title>
     <style>
         :root {
             --primary-color: #ee4d2d;
             --primary-color-dark: #d73210;
             --success-color: #28a745;
             --error-color: #dc3545;
-            --warning-color: #ffc107; /* Using yellow for zero profit */
+            --warning-color: #ffc107;
             --text-color: #333;
             --text-color-light: #555;
             --text-color-footer: #6c757d;
@@ -19,7 +19,7 @@
             --white: #fff;
             --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
             --border-radius: 8px;
-            --transition-speed: 0.3s; /* Keep for potential future use or hover effects */
+            --transition-speed: 0.3s;
         }
 
         *, *::before, *::after {
@@ -60,9 +60,20 @@
         h1 {
             text-align: center;
             color: var(--primary-color);
-            margin-bottom: 25px;
+            /* Remove bottom margin from h1 if note is directly below */
+            margin-bottom: 10px;
             font-size: 1.8em;
         }
+
+        /* Style for the note below h1 */
+        .luu-y {
+            text-align: center;
+            font-size: 0.9em;
+            color: var(--text-color-light);
+            margin-bottom: 25px; /* Add back margin below the note */
+            font-style: italic; /* Make it italic */
+        }
+
 
         .form-group {
             margin-bottom: 20px;
@@ -136,38 +147,36 @@
             transform: scale(0.98);
         }
 
-        /* --- New Direct Result Area Styling --- */
+        /* --- Direct Result Area Styling --- */
         #ketQuaTrucTiep {
-            margin-top: 25px; /* Space below button */
+            margin-top: 25px;
             padding: 15px 20px;
             border-radius: var(--border-radius);
-            background-color: var(--background-color); /* Light background */
+            background-color: var(--background-color);
             border: 1px solid var(--border-color);
-            min-height: 2.5em; /* Reserve some initial height */
-            text-align: center; /* Center the result text */
+            min-height: 2.5em;
+            text-align: center;
             font-size: 1.1em;
             line-height: 1.5;
-            /* Remove animation/transition properties */
         }
 
         #ketQuaTrucTiep.result-positive {
-            background-color: #f0fff4; /* Light green */
+            background-color: #f0fff4;
             border-color: var(--success-color);
         }
         #ketQuaTrucTiep.result-negative {
-            background-color: #fff5f5; /* Light red */
+            background-color: #fff5f5;
             border-color: var(--error-color);
         }
         #ketQuaTrucTiep.result-zero {
-             background-color: #fffcf0; /* Light yellow */
+             background-color: #fffcf0;
             border-color: var(--warning-color);
         }
 
-
-        /* Color classes for the profit/loss number itself */
+        /* Color classes for the profit/loss number */
         .positive { color: var(--success-color); font-weight: 700; }
         .negative { color: var(--error-color); font-weight: 700; }
-        .zero { color: var(--warning-color); font-weight: 700; } /* Use warning color for zero */
+        .zero { color: var(--warning-color); font-weight: 700; }
 
         .error {
             color: var(--error-color);
@@ -189,15 +198,14 @@
         footer a { color: var(--primary-color); text-decoration: none; transition: color var(--transition-speed) ease; }
         footer a:hover { color: var(--primary-color-dark); text-decoration: underline; }
 
-        /* Hide the old result div if you keep it in HTML */
-        /* #ketqua { display: none; } */
-
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Công Cụ Tính Lợi Nhuận Shopee</h1>
+    <h1>Công Cụ Tính Lợi Nhuận Shopee (Tối Giản)</h1>
+    <!-- === ADDED NOTE HERE === -->
+    <p class="luu-y">Lưu ý: Chi phí trừ đi chưa bao gồm phí vận hành, kho bãi, nhân sự, đóng gói v.v.. của nhà bán.</p>
 
     <div class="form-group">
         <label for="giaNhap">Giá Nhập (VNĐ)</label>
@@ -220,20 +228,16 @@
      <div class="form-group">
          <label class="checkbox-label" for="isMall">
              <input type="checkbox" id="isMall">
-             <span>Gian hàng là Shopee Mall</span>
+             <span>Gian hàng là Shopee Mall (+3% phí cố định)</span>
          </label>
     </div>
 
     <button id="tinhToanBtn">Tính Lợi Nhuận</button>
 
-    <!-- === NEW RESULT AREA === -->
+    <!-- === RESULT AREA === -->
     <div id="ketQuaTrucTiep">
         <!-- Kết quả sẽ được hiển thị ở đây -->
     </div>
-     <!-- === OLD RESULT AREA (Optional: can be removed or kept hidden) === -->
-     <!-- <div id="ketqua">
-         <p><strong id="ketquaDescription"></strong><span id="loiNhuan"></span> VNĐ</p>
-    </div> -->
 
 </div>
 
@@ -246,56 +250,42 @@
 </footer>
 
 <script defer>
+    // --- JavaScript code remains the same as the previous version ---
     const giaNhapInput = document.getElementById('giaNhap');
     const giaBanInput = document.getElementById('giaBan');
     const phanTramQuangCaoInput = document.getElementById('phanTramQuangCao');
     const isMallCheckbox = document.getElementById('isMall');
     const tinhToanBtn = document.getElementById('tinhToanBtn');
-    // Target the NEW result area
     const ketQuaTrucTiepDiv = document.getElementById('ketQuaTrucTiep');
 
-    // Error message divs
     const errorGiaNhap = document.getElementById('errorGiaNhap');
     const errorGiaBan = document.getElementById('errorGiaBan');
     const errorQuangCao = document.getElementById('errorQuangCao');
 
-    // --- Cost Rates ---
     const TYLE_PHI_CO_DINH = 0.10;
     const TYLE_PHI_THANH_TOAN = 0.05;
     const TYLE_THUE = 0.015;
     const TYLE_PHI_MALL = 0.03;
     const TYLE_VAT_QUANG_CAO = 0.10;
-    const TYLE_CONTENTEXTRA = 0.03;
-    const TYLE_AFFILIATE_ADS = 0.15;
-    const TYLE_VOUCHER = 0.05;
-    const TYLE_HOAN_HUY = 0.02;
-    const TYLE_VAN_HANH = 0.10;
-    const TYLE_DONG_GOI = 0.01;
-    // ------------------
 
     function formatCurrency(value) {
         const numValue = Number(value);
-        if (isNaN(numValue)) {
-            return 'Lỗi';
-        }
+        if (isNaN(numValue)) { return 'Lỗi'; }
         return Math.round(numValue).toLocaleString('vi-VN');
     }
 
     function tinhLoiNhuan() {
-        // 1. Clear previous errors and reset result area
         errorGiaNhap.textContent = '';
         errorGiaBan.textContent = '';
         errorQuangCao.textContent = '';
-        ketQuaTrucTiepDiv.innerHTML = ''; // Clear previous result
-        ketQuaTrucTiepDiv.className = ''; // Remove result classes (positive/negative/zero)
+        ketQuaTrucTiepDiv.innerHTML = '';
+        ketQuaTrucTiepDiv.className = '';
 
-        // 2. Get input values
         const giaNhap = parseFloat(giaNhapInput.value) || 0;
         const giaBan = parseFloat(giaBanInput.value) || 0;
         const phanTramQuangCao = parseFloat(phanTramQuangCaoInput.value) || 0;
         const isMall = isMallCheckbox.checked;
 
-        // 3. Validate Input
         let isValid = true;
         if (giaNhapInput.value.trim() === '' || isNaN(parseFloat(giaNhapInput.value)) || giaNhap < 0) {
             errorGiaNhap.textContent = 'Vui lòng nhập giá nhập hợp lệ (số không âm).';
@@ -310,30 +300,18 @@
             isValid = false;
         }
 
-        if (!isValid) {
-            // Optional: Display a placeholder message in the result area
-            // ketQuaTrucTiepDiv.textContent = 'Vui lòng nhập đủ thông tin hợp lệ.';
-            return; // Stop calculation
-        }
+        if (!isValid) { return; }
 
-        // --- Calculations (Proceed only if valid) ---
         const phiCoDinh = giaBan * TYLE_PHI_CO_DINH;
         const phiThanhToan = giaBan * TYLE_PHI_THANH_TOAN;
         const thue = giaBan * TYLE_THUE;
         const phiMall = isMall ? giaBan * TYLE_PHI_MALL : 0;
-        const contentextra = giaBan * TYLE_CONTENTEXTRA;
-        const affiliateAds = giaBan * TYLE_AFFILIATE_ADS;
-        const voucher = giaBan * TYLE_VOUCHER;
-        const hoanHuy = giaBan * TYLE_HOAN_HUY;
-        const chiPhiVanHanh = giaBan * TYLE_VAN_HANH;
-        const chiPhiDongGoi = giaBan * TYLE_DONG_GOI;
         const chiPhiQuangCao = giaBan * (phanTramQuangCao / 100);
         const vatQuangCao = chiPhiQuangCao * TYLE_VAT_QUANG_CAO;
-        const tongChiPhiTruGiaNhap = phiCoDinh + phiThanhToan + thue + phiMall + chiPhiQuangCao + vatQuangCao + contentextra + affiliateAds + voucher + hoanHuy + chiPhiVanHanh + chiPhiDongGoi;
+        const tongChiPhiTruGiaNhap = phiCoDinh + phiThanhToan + thue + phiMall + chiPhiQuangCao + vatQuangCao;
         const tongChiPhiBaoGomGiaGoc = tongChiPhiTruGiaNhap + giaNhap;
         const loiNhuan = giaBan - tongChiPhiBaoGomGiaGoc;
 
-        // 5. Prepare and Display Result Directly
         let resultHTML = '';
         let resultClass = '';
         let colorClass = '';
@@ -352,13 +330,10 @@
             resultHTML = `Hòa vốn ước tính: <span class="${colorClass}">${formatCurrency(loiNhuan)}</span> VNĐ`;
         }
 
-        // Apply style class to the container div
         ketQuaTrucTiepDiv.classList.add(resultClass);
-        // Set the inner HTML to display the result text with styled number
         ketQuaTrucTiepDiv.innerHTML = resultHTML;
     }
 
-    // --- Attach event listener ---
     tinhToanBtn.addEventListener('click', tinhLoiNhuan);
 
 </script>
