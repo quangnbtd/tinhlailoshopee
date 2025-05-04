@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Công Cụ Tính Giá Shopee Hiện Đại - Vũ Quang Ecommerce</title> {/* Thêm tên vào title */}
+    <title>Công Cụ Tính Giá Shopee Hiện Đại - Vũ Quang Ecommerce</title>
     <style>
         :root {
             --primary-color: #ee4d2d;
@@ -13,7 +13,7 @@
             --warning-color: #ffc107;
             --text-color: #333;
             --text-color-light: #555;
-            --text-color-footer: #6c757d; /* Màu chữ footer */
+            --text-color-footer: #6c757d;
             --border-color: #ddd;
             --background-color: #f8f9fa;
             --white: #fff;
@@ -29,7 +29,7 @@
         }
 
         html {
-             scroll-behavior: smooth; /* Smooth scroll */
+             scroll-behavior: smooth;
         }
 
         body {
@@ -38,8 +38,8 @@
             background-color: var(--background-color);
             color: var(--text-color);
             display: flex;
-            flex-direction: column; /* Stack container and footer vertically */
-            justify-content: space-between; /* Push footer down */
+            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
             min-height: 100vh;
             padding: 20px;
@@ -53,8 +53,8 @@
             max-width: 500px;
             width: 100%;
             margin-top: 30px;
-            margin-bottom: 30px; /* Add space above footer */
-            flex-shrink: 0; /* Prevent container from shrinking */
+            margin-bottom: 30px;
+            flex-shrink: 0;
         }
 
         h1 {
@@ -102,14 +102,17 @@
         }
 
         .checkbox-label {
-            display: inline-flex; /* Align items vertically */
+            display: inline-flex;
             align-items: center;
             font-weight: normal;
             color: var(--text-color-light);
             cursor: pointer;
             user-select: none;
-             margin-bottom: 0;
+            margin-bottom: 0;
         }
+         .checkbox-label span { /* Ensure text aligns well */
+             line-height: 1.2;
+         }
 
         button {
             display: block;
@@ -133,34 +136,56 @@
             transform: scale(0.98);
         }
 
+        /* --- Result Area Styling --- */
         #ketqua {
             margin-top: 30px;
             padding: 20px;
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--border-color); /* Default border */
+            border-left-width: 5px; /* Make space for colored border */
+            border-left-color: transparent; /* Start transparent */
             border-radius: var(--border-radius);
-            background-color: #fdfdfd;
+            background-color: var(--white); /* Use white for base */
+
+            /* Initial state for transition */
             opacity: 0;
-            visibility: hidden;
-            transform: translateY(15px);
-            transition: opacity var(--transition-speed) ease, transform var(--transition-speed) ease, visibility var(--transition-speed) ease, border-color var(--transition-speed) ease;
+            visibility: hidden; /* Use visibility for accessibility and transition control */
+            max-height: 0; /* Animate height for smoother appearance */
+            transform: translateY(10px); /* Slight upward movement */
+            overflow: hidden; /* Needed for max-height transition */
+
+            /* Transitions */
+            transition: opacity var(--transition-speed) ease,
+                        transform var(--transition-speed) ease,
+                        max-height var(--transition-speed) ease, /* Animate height */
+                        border-left-color var(--transition-speed) ease, /* Animate border color */
+                        background-color var(--transition-speed) ease, /* Animate background */
+                        visibility 0s linear var(--transition-speed); /* Delay hiding */
             position: relative;
         }
 
         #ketqua.active {
             opacity: 1;
-            visibility: visible;
+            visibility: visible; /* Make visible */
+            max-height: 500px; /* Set a max-height large enough for content */
             transform: translateY(0);
+            transition: opacity var(--transition-speed) ease,
+                        transform var(--transition-speed) ease,
+                        max-height var(--transition-speed) ease,
+                        border-left-color var(--transition-speed) ease,
+                        background-color var(--transition-speed) ease,
+                        visibility 0s linear 0s; /* Make visible instantly */
         }
 
+        /* Styling based on profit */
         #ketqua.result-positive {
-            border-left: 5px solid var(--success-color);
+            border-left-color: var(--success-color);
             background-color: #f0fff4;
         }
         #ketqua.result-negative {
-            border-left: 5px solid var(--error-color);
+            border-left-color: var(--error-color);
             background-color: #fff5f5;
         }
-        #ketqua.result-negative::before {
+        #ketqua.result-negative::before { /* Warning Icon */
             content: '!';
             position: absolute;
             right: 15px;
@@ -177,9 +202,10 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            background-color: var(--white); /* Ensure icon bg is visible */
         }
         #ketqua.result-zero {
-            border-left: 5px solid var(--warning-color);
+            border-left-color: var(--warning-color);
             background-color: #fffcf0;
         }
 
@@ -188,7 +214,7 @@
             margin: 0;
             font-size: 1.1em;
             color: var(--text-color);
-            padding-right: 35px; /* Make space for potential icon */
+            padding-right: 40px; /* Make space for potential icon */
         }
         #ketqua p strong {
              font-weight: 600;
@@ -208,21 +234,21 @@
             color: var(--error-color);
             font-size: 0.85em;
             margin-top: 5px;
-            height: 1.2em;
+            min-height: 1.2em; /* Reserve space */
         }
 
         /* Footer Styling */
         footer {
             text-align: center;
             padding: 20px 15px;
-            margin-top: auto; /* Pushes footer to bottom */
+            margin-top: auto;
             width: 100%;
             font-size: 0.9em;
             color: var(--text-color-footer);
         }
 
         footer p {
-            margin-bottom: 8px; /* Space between lines */
+            margin-bottom: 8px;
         }
 
         footer a {
@@ -270,7 +296,7 @@
 
     <button id="tinhToanBtn">Tính Lợi Nhuận</button>
 
-    <div id="ketqua">
+    <div id="ketqua"> {/* Base state is hidden via CSS */}
          <p><strong id="ketquaDescription"></strong><span id="loiNhuan"></span> VNĐ</p>
     </div>
 </div>
@@ -313,46 +339,68 @@
     // ----------------------------------------------------
 
     function formatCurrency(value) {
-        return Math.round(value).toLocaleString('vi-VN');
+        // Ensure value is treated as a number before rounding
+        const numValue = Number(value);
+        if (isNaN(numValue)) {
+            return 'Lỗi'; // Or handle appropriately
+        }
+        return Math.round(numValue).toLocaleString('vi-VN');
     }
 
+
     function tinhLoiNhuan() {
-        // 1. Clear previous state
+        // 1. Clear previous errors and hide result smoothly
         errorGiaNhap.textContent = '';
         errorGiaBan.textContent = '';
         errorQuangCao.textContent = '';
+        // Remove result/active classes to trigger hiding animation
         ketquaDiv.classList.remove('active', 'result-positive', 'result-negative', 'result-zero');
-        ketquaDiv.style.visibility = 'hidden';
-        ketquaDiv.style.opacity = '0';
 
 
         // 2. Get input values
-        const giaNhap = parseFloat(giaNhapInput.value);
-        const giaBan = parseFloat(giaBanInput.value);
-        const phanTramQuangCao = parseFloat(phanTramQuangCaoInput.value);
+        // Use || 0 to default to 0 if input is empty or invalid, simplifying validation
+        const giaNhap = parseFloat(giaNhapInput.value) || 0;
+        const giaBan = parseFloat(giaBanInput.value) || 0;
+        const phanTramQuangCao = parseFloat(phanTramQuangCaoInput.value) || 0;
         const isMall = isMallCheckbox.checked;
 
-        // 3. Validate Input
+        // 3. Validate Input (Check for non-negative/positive constraints)
         let isValid = true;
-        if (isNaN(giaNhap) || giaNhap < 0) {
-            errorGiaNhap.textContent = 'Vui lòng nhập giá nhập hợp lệ (số không âm).';
+        if (giaNhap < 0) {
+            errorGiaNhap.textContent = 'Giá nhập không được âm.';
             isValid = false;
         }
-        if (isNaN(giaBan) || giaBan <= 0) {
-            errorGiaBan.textContent = 'Vui lòng nhập giá bán hợp lệ (số dương).';
+        // Check if original input was empty or non-numeric AFTER defaulting
+        if (giaNhapInput.value.trim() === '' || isNaN(parseFloat(giaNhapInput.value))) {
+             errorGiaNhap.textContent = 'Vui lòng nhập giá nhập.';
+             isValid = false;
+        }
+
+        if (giaBan <= 0) { // Giá bán phải là số dương
+            errorGiaBan.textContent = 'Giá bán phải là số dương.';
+             // Check if original input was empty or non-numeric AFTER defaulting
+             if (giaBanInput.value.trim() === '' || isNaN(parseFloat(giaBanInput.value))) {
+                 errorGiaBan.textContent = 'Vui lòng nhập giá bán.';
+             }
             isValid = false;
         }
-         if (isNaN(phanTramQuangCao) || phanTramQuangCao < 0) {
-            errorQuangCao.textContent = 'Vui lòng nhập % quảng cáo hợp lệ (số không âm).';
+         if (phanTramQuangCao < 0) {
+            errorQuangCao.textContent = '% quảng cáo không được âm.';
+            isValid = false;
+        }
+        // Check if original input was empty or non-numeric AFTER defaulting
+        if (phanTramQuangCaoInput.value.trim() === '' || isNaN(parseFloat(phanTramQuangCaoInput.value))) {
+            errorQuangCao.textContent = 'Vui lòng nhập % quảng cáo.';
             isValid = false;
         }
 
+
         if (!isValid) {
-             ketquaDiv.classList.remove('active');
-             ketquaDiv.style.visibility = 'hidden';
-             ketquaDiv.style.opacity = '0';
+            // Ensure result stays hidden (it should already be hiding due to class removal)
             return;
         }
+
+        // --- Calculations (Proceed only if valid) ---
 
         // 4. Calculate costs based on Selling Price (giaBan)
         const phiCoDinh = giaBan * TYLE_PHI_CO_DINH;
@@ -381,34 +429,40 @@
         // 6. Calculate Profit
         const loiNhuan = giaBan - tongChiPhiBaoGomGiaGoc;
 
-        // 7. Display Result
-        loiNhuanSpan.textContent = formatCurrency(loiNhuan);
-        loiNhuanSpan.className = '';
-
+        // 7. Prepare and Display Result
         let resultClass = '';
         let description = '';
+        let colorClass = '';
 
         if (loiNhuan > 0) {
             resultClass = 'result-positive';
-            loiNhuanSpan.classList.add('positive');
+            colorClass = 'positive';
             description = 'Lợi nhuận ước tính';
         } else if (loiNhuan < 0) {
             resultClass = 'result-negative';
-            loiNhuanSpan.classList.add('negative');
+            colorClass = 'negative';
             description = 'Lỗ ước tính';
         } else {
             resultClass = 'result-zero';
-            loiNhuanSpan.classList.add('zero');
+            colorClass = 'zero';
             description = 'Hòa vốn ước tính';
         }
 
-        ketquaDescriptionSpan.textContent = description + ': '; // Add colon for separation
+        // Update text content
+        ketquaDescriptionSpan.textContent = description + ': ';
+        loiNhuanSpan.textContent = formatCurrency(loiNhuan);
+        loiNhuanSpan.className = colorClass; // Apply color class directly
+
+        // Apply result styling class
         ketquaDiv.classList.add(resultClass);
 
-        requestAnimationFrame(() => {
-             ketquaDiv.style.visibility = 'visible';
-             ketquaDiv.classList.add('active');
-         });
+        // Use setTimeout to allow the browser to process the class removal first,
+        // then add 'active' to trigger the showing animation correctly.
+        // requestAnimationFrame might run too quickly in some cases.
+        setTimeout(() => {
+            ketquaDiv.classList.add('active');
+        }, 10); // Small delay (10ms) usually enough
+
     }
 
     // --- Attach event listener ---
