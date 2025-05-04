@@ -10,7 +10,7 @@
             --primary-color-dark: #d73210;
             --success-color: #28a745;
             --error-color: #dc3545;
-            --warning-color: #ffc107;
+            --warning-color: #ffc107; /* Using yellow for zero profit */
             --text-color: #333;
             --text-color-light: #555;
             --text-color-footer: #6c757d;
@@ -19,7 +19,7 @@
             --white: #fff;
             --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
             --border-radius: 8px;
-            --transition-speed: 0.3s;
+            --transition-speed: 0.3s; /* Keep for potential future use or hover effects */
         }
 
         *, *::before, *::after {
@@ -110,7 +110,7 @@
             user-select: none;
             margin-bottom: 0;
         }
-         .checkbox-label span { /* Ensure text aligns well */
+         .checkbox-label span {
              line-height: 1.2;
          }
 
@@ -136,105 +136,44 @@
             transform: scale(0.98);
         }
 
-        /* --- Result Area Styling --- */
-        #ketqua {
-            margin-top: 30px;
-            padding: 20px;
-            border: 1px solid var(--border-color); /* Default border */
-            border-left-width: 5px; /* Make space for colored border */
-            border-left-color: transparent; /* Start transparent */
+        /* --- New Direct Result Area Styling --- */
+        #ketQuaTrucTiep {
+            margin-top: 25px; /* Space below button */
+            padding: 15px 20px;
             border-radius: var(--border-radius);
-            background-color: var(--white); /* Use white for base */
-
-            /* Initial state for transition */
-            opacity: 0;
-            visibility: hidden; /* Use visibility for accessibility and transition control */
-            max-height: 0; /* Animate height for smoother appearance */
-            transform: translateY(10px); /* Slight upward movement */
-            overflow: hidden; /* Needed for max-height transition */
-
-            /* Transitions */
-            transition: opacity var(--transition-speed) ease,
-                        transform var(--transition-speed) ease,
-                        max-height var(--transition-speed) ease, /* Animate height */
-                        border-left-color var(--transition-speed) ease, /* Animate border color */
-                        background-color var(--transition-speed) ease, /* Animate background */
-                        visibility 0s linear var(--transition-speed); /* Delay hiding */
-            position: relative;
-        }
-
-        #ketqua.active {
-            opacity: 1;
-            visibility: visible; /* Make visible */
-            max-height: 500px; /* Set a max-height large enough for content */
-            transform: translateY(0);
-            transition: opacity var(--transition-speed) ease,
-                        transform var(--transition-speed) ease,
-                        max-height var(--transition-speed) ease,
-                        border-left-color var(--transition-speed) ease,
-                        background-color var(--transition-speed) ease,
-                        visibility 0s linear 0s; /* Make visible instantly */
-        }
-
-        /* Styling based on profit */
-        #ketqua.result-positive {
-            border-left-color: var(--success-color);
-            background-color: #f0fff4;
-        }
-        #ketqua.result-negative {
-            border-left-color: var(--error-color);
-            background-color: #fff5f5;
-        }
-        #ketqua.result-negative::before { /* Warning Icon */
-            content: '!';
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--error-color);
-            font-weight: bold;
-            font-size: 1.5em;
-            line-height: 1;
-            border: 2px solid var(--error-color);
-            border-radius: 50%;
-            width: 25px;
-            height: 25px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: var(--white); /* Ensure icon bg is visible */
-        }
-        #ketqua.result-zero {
-            border-left-color: var(--warning-color);
-            background-color: #fffcf0;
-        }
-
-
-        #ketqua p {
-            margin: 0;
+            background-color: var(--background-color); /* Light background */
+            border: 1px solid var(--border-color);
+            min-height: 2.5em; /* Reserve some initial height */
+            text-align: center; /* Center the result text */
             font-size: 1.1em;
-            color: var(--text-color);
-            padding-right: 40px; /* Make space for potential icon */
-        }
-        #ketqua p strong {
-             font-weight: 600;
+            line-height: 1.5;
+            /* Remove animation/transition properties */
         }
 
-        #loiNhuan {
-            font-weight: 700;
-            font-size: 1.4em;
-            margin-left: 5px;
+        #ketQuaTrucTiep.result-positive {
+            background-color: #f0fff4; /* Light green */
+            border-color: var(--success-color);
+        }
+        #ketQuaTrucTiep.result-negative {
+            background-color: #fff5f5; /* Light red */
+            border-color: var(--error-color);
+        }
+        #ketQuaTrucTiep.result-zero {
+             background-color: #fffcf0; /* Light yellow */
+            border-color: var(--warning-color);
         }
 
-        #ketqua .positive { color: var(--success-color); }
-        #ketqua .negative { color: var(--error-color); }
-        #ketqua .zero { color: var(--warning-color); }
+
+        /* Color classes for the profit/loss number itself */
+        .positive { color: var(--success-color); font-weight: 700; }
+        .negative { color: var(--error-color); font-weight: 700; }
+        .zero { color: var(--warning-color); font-weight: 700; } /* Use warning color for zero */
 
         .error {
             color: var(--error-color);
             font-size: 0.85em;
             margin-top: 5px;
-            min-height: 1.2em; /* Reserve space */
+            min-height: 1.2em;
         }
 
         /* Footer Styling */
@@ -246,21 +185,12 @@
             font-size: 0.9em;
             color: var(--text-color-footer);
         }
+        footer p { margin-bottom: 8px; }
+        footer a { color: var(--primary-color); text-decoration: none; transition: color var(--transition-speed) ease; }
+        footer a:hover { color: var(--primary-color-dark); text-decoration: underline; }
 
-        footer p {
-            margin-bottom: 8px;
-        }
-
-        footer a {
-            color: var(--primary-color);
-            text-decoration: none;
-            transition: color var(--transition-speed) ease;
-        }
-
-        footer a:hover {
-            color: var(--primary-color-dark);
-            text-decoration: underline;
-        }
+        /* Hide the old result div if you keep it in HTML */
+        /* #ketqua { display: none; } */
 
     </style>
 </head>
@@ -290,15 +220,21 @@
      <div class="form-group">
          <label class="checkbox-label" for="isMall">
              <input type="checkbox" id="isMall">
-             <span>Gian hàng là Shopee Mall (+3% phí cố định)</span>
+             <span>Gian hàng là Shopee Mall</span>
          </label>
     </div>
 
     <button id="tinhToanBtn">Tính Lợi Nhuận</button>
 
-    <div id="ketqua"> {/* Base state is hidden via CSS */}
-         <p><strong id="ketquaDescription"></strong><span id="loiNhuan"></span> VNĐ</p>
+    <!-- === NEW RESULT AREA === -->
+    <div id="ketQuaTrucTiep">
+        <!-- Kết quả sẽ được hiển thị ở đây -->
     </div>
+     <!-- === OLD RESULT AREA (Optional: can be removed or kept hidden) === -->
+     <!-- <div id="ketqua">
+         <p><strong id="ketquaDescription"></strong><span id="loiNhuan"></span> VNĐ</p>
+    </div> -->
+
 </div>
 
 <footer>
@@ -315,94 +251,72 @@
     const phanTramQuangCaoInput = document.getElementById('phanTramQuangCao');
     const isMallCheckbox = document.getElementById('isMall');
     const tinhToanBtn = document.getElementById('tinhToanBtn');
-    const ketquaDiv = document.getElementById('ketqua');
-    const ketquaDescriptionSpan = document.getElementById('ketquaDescription');
-    const loiNhuanSpan = document.getElementById('loiNhuan');
+    // Target the NEW result area
+    const ketQuaTrucTiepDiv = document.getElementById('ketQuaTrucTiep');
 
     // Error message divs
     const errorGiaNhap = document.getElementById('errorGiaNhap');
     const errorGiaBan = document.getElementById('errorGiaBan');
     const errorQuangCao = document.getElementById('errorQuangCao');
 
-    // --- Cost Rates (based on Selling Price) ---
+    // --- Cost Rates ---
     const TYLE_PHI_CO_DINH = 0.10;
     const TYLE_PHI_THANH_TOAN = 0.05;
     const TYLE_THUE = 0.015;
     const TYLE_PHI_MALL = 0.03;
-    const TYLE_VAT_QUANG_CAO = 0.10; // 10% VAT on Advertising Cost
+    const TYLE_VAT_QUANG_CAO = 0.10;
     const TYLE_CONTENTEXTRA = 0.03;
     const TYLE_AFFILIATE_ADS = 0.15;
     const TYLE_VOUCHER = 0.05;
     const TYLE_HOAN_HUY = 0.02;
     const TYLE_VAN_HANH = 0.10;
     const TYLE_DONG_GOI = 0.01;
-    // ----------------------------------------------------
+    // ------------------
 
     function formatCurrency(value) {
-        // Ensure value is treated as a number before rounding
         const numValue = Number(value);
         if (isNaN(numValue)) {
-            return 'Lỗi'; // Or handle appropriately
+            return 'Lỗi';
         }
         return Math.round(numValue).toLocaleString('vi-VN');
     }
 
-
     function tinhLoiNhuan() {
-        // 1. Clear previous errors and hide result smoothly
+        // 1. Clear previous errors and reset result area
         errorGiaNhap.textContent = '';
         errorGiaBan.textContent = '';
         errorQuangCao.textContent = '';
-        // Remove result/active classes to trigger hiding animation
-        ketquaDiv.classList.remove('active', 'result-positive', 'result-negative', 'result-zero');
-
+        ketQuaTrucTiepDiv.innerHTML = ''; // Clear previous result
+        ketQuaTrucTiepDiv.className = ''; // Remove result classes (positive/negative/zero)
 
         // 2. Get input values
-        // Use || 0 to default to 0 if input is empty or invalid, simplifying validation
         const giaNhap = parseFloat(giaNhapInput.value) || 0;
         const giaBan = parseFloat(giaBanInput.value) || 0;
         const phanTramQuangCao = parseFloat(phanTramQuangCaoInput.value) || 0;
         const isMall = isMallCheckbox.checked;
 
-        // 3. Validate Input (Check for non-negative/positive constraints)
+        // 3. Validate Input
         let isValid = true;
-        if (giaNhap < 0) {
-            errorGiaNhap.textContent = 'Giá nhập không được âm.';
+        if (giaNhapInput.value.trim() === '' || isNaN(parseFloat(giaNhapInput.value)) || giaNhap < 0) {
+            errorGiaNhap.textContent = 'Vui lòng nhập giá nhập hợp lệ (số không âm).';
             isValid = false;
         }
-        // Check if original input was empty or non-numeric AFTER defaulting
-        if (giaNhapInput.value.trim() === '' || isNaN(parseFloat(giaNhapInput.value))) {
-             errorGiaNhap.textContent = 'Vui lòng nhập giá nhập.';
-             isValid = false;
-        }
-
-        if (giaBan <= 0) { // Giá bán phải là số dương
-            errorGiaBan.textContent = 'Giá bán phải là số dương.';
-             // Check if original input was empty or non-numeric AFTER defaulting
-             if (giaBanInput.value.trim() === '' || isNaN(parseFloat(giaBanInput.value))) {
-                 errorGiaBan.textContent = 'Vui lòng nhập giá bán.';
-             }
+        if (giaBanInput.value.trim() === '' || isNaN(parseFloat(giaBanInput.value)) || giaBan <= 0) {
+            errorGiaBan.textContent = 'Vui lòng nhập giá bán hợp lệ (số dương).';
             isValid = false;
         }
-         if (phanTramQuangCao < 0) {
-            errorQuangCao.textContent = '% quảng cáo không được âm.';
+        if (phanTramQuangCaoInput.value.trim() === '' || isNaN(parseFloat(phanTramQuangCaoInput.value)) || phanTramQuangCao < 0) {
+            errorQuangCao.textContent = 'Vui lòng nhập % quảng cáo hợp lệ (số không âm).';
             isValid = false;
         }
-        // Check if original input was empty or non-numeric AFTER defaulting
-        if (phanTramQuangCaoInput.value.trim() === '' || isNaN(parseFloat(phanTramQuangCaoInput.value))) {
-            errorQuangCao.textContent = 'Vui lòng nhập % quảng cáo.';
-            isValid = false;
-        }
-
 
         if (!isValid) {
-            // Ensure result stays hidden (it should already be hiding due to class removal)
-            return;
+            // Optional: Display a placeholder message in the result area
+            // ketQuaTrucTiepDiv.textContent = 'Vui lòng nhập đủ thông tin hợp lệ.';
+            return; // Stop calculation
         }
 
         // --- Calculations (Proceed only if valid) ---
-
-        // 4. Calculate costs based on Selling Price (giaBan)
         const phiCoDinh = giaBan * TYLE_PHI_CO_DINH;
         const phiThanhToan = giaBan * TYLE_PHI_THANH_TOAN;
         const thue = giaBan * TYLE_THUE;
@@ -413,56 +327,35 @@
         const hoanHuy = giaBan * TYLE_HOAN_HUY;
         const chiPhiVanHanh = giaBan * TYLE_VAN_HANH;
         const chiPhiDongGoi = giaBan * TYLE_DONG_GOI;
-
-        // Advertising cost and its VAT
         const chiPhiQuangCao = giaBan * (phanTramQuangCao / 100);
         const vatQuangCao = chiPhiQuangCao * TYLE_VAT_QUANG_CAO;
-
-        // 5. Calculate Total Costs
-        const tongChiPhiTruGiaNhap =
-            phiCoDinh + phiThanhToan + thue + phiMall +
-            chiPhiQuangCao + vatQuangCao + contentextra + affiliateAds +
-            voucher + hoanHuy + chiPhiVanHanh + chiPhiDongGoi;
-
+        const tongChiPhiTruGiaNhap = phiCoDinh + phiThanhToan + thue + phiMall + chiPhiQuangCao + vatQuangCao + contentextra + affiliateAds + voucher + hoanHuy + chiPhiVanHanh + chiPhiDongGoi;
         const tongChiPhiBaoGomGiaGoc = tongChiPhiTruGiaNhap + giaNhap;
-
-        // 6. Calculate Profit
         const loiNhuan = giaBan - tongChiPhiBaoGomGiaGoc;
 
-        // 7. Prepare and Display Result
+        // 5. Prepare and Display Result Directly
+        let resultHTML = '';
         let resultClass = '';
-        let description = '';
         let colorClass = '';
 
         if (loiNhuan > 0) {
             resultClass = 'result-positive';
             colorClass = 'positive';
-            description = 'Lợi nhuận ước tính';
+            resultHTML = `Lợi nhuận ước tính: <span class="${colorClass}">${formatCurrency(loiNhuan)}</span> VNĐ`;
         } else if (loiNhuan < 0) {
             resultClass = 'result-negative';
             colorClass = 'negative';
-            description = 'Lỗ ước tính';
+            resultHTML = `Lỗ ước tính: <span class="${colorClass}">${formatCurrency(loiNhuan)}</span> VNĐ`;
         } else {
             resultClass = 'result-zero';
             colorClass = 'zero';
-            description = 'Hòa vốn ước tính';
+            resultHTML = `Hòa vốn ước tính: <span class="${colorClass}">${formatCurrency(loiNhuan)}</span> VNĐ`;
         }
 
-        // Update text content
-        ketquaDescriptionSpan.textContent = description + ': ';
-        loiNhuanSpan.textContent = formatCurrency(loiNhuan);
-        loiNhuanSpan.className = colorClass; // Apply color class directly
-
-        // Apply result styling class
-        ketquaDiv.classList.add(resultClass);
-
-        // Use setTimeout to allow the browser to process the class removal first,
-        // then add 'active' to trigger the showing animation correctly.
-        // requestAnimationFrame might run too quickly in some cases.
-        setTimeout(() => {
-            ketquaDiv.classList.add('active');
-        }, 10); // Small delay (10ms) usually enough
-
+        // Apply style class to the container div
+        ketQuaTrucTiepDiv.classList.add(resultClass);
+        // Set the inner HTML to display the result text with styled number
+        ketQuaTrucTiepDiv.innerHTML = resultHTML;
     }
 
     // --- Attach event listener ---
