@@ -3,22 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Công Cụ Tính Lợi Nhuận Shopee - Vũ Quang Ecommerce</title>
+    <title>Công Cụ Tính Giá Shopee Chi Tiết - Vũ Quang Ecommerce</title>
     <style>
         :root {
-            --primary-color: #ff6200;
-            --primary-color-dark: #e05500;
-            --success-color: #22c55e;
-            --error-color: #ef4444;
-            --warning-color: #f59e0b;
-            --text-color: #1f2937;
-            --text-color-light: #6b7280;
-            --text-color-footer: #9ca3af;
-            --border-color: #e5e7eb;
-            --background-color: #f3f4f6;
-            --white: #ffffff;
-            --box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-            --border-radius: 12px;
+            --primary-color: #ee4d2d;
+            --primary-color-dark: #d73210;
+            --success-color: #28a745;
+            --error-color: #dc3545;
+            --warning-color: #ffc107;
+            --text-color: #333;
+            --text-color-light: #555;
+            --text-color-footer: #6c757d;
+            --note-color: #777; /* Color for small notes */
+            --border-color: #ddd;
+            --background-color: #f8f9fa;
+            --white: #fff;
+            --box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            --border-radius: 8px;
             --transition-speed: 0.3s;
         }
 
@@ -29,199 +30,194 @@
         }
 
         html {
-            scroll-behavior: smooth;
+             scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             line-height: 1.6;
-            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+            background-color: var(--background-color);
             color: var(--text-color);
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
             align-items: center;
             min-height: 100vh;
             padding: 20px;
         }
 
         .container {
-            background: var(--white);
-            padding: 40px;
+            background-color: var(--white);
+            padding: 30px 35px;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
-            max-width: 600px;
+            max-width: 550px; /* Wider for more fields */
             width: 100%;
-            margin: 40px 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 6px;
-            background: linear-gradient(to right, var(--primary-color), var(--primary-color-dark));
+            margin-top: 30px;
+            margin-bottom: 30px;
+            flex-shrink: 0;
         }
 
         h1 {
             text-align: center;
             color: var(--primary-color);
-            font-size: 2rem;
-            font-weight: 700;
             margin-bottom: 10px;
+            font-size: 1.8em;
         }
 
+        /* Updated note style */
         .luu-y {
             text-align: center;
-            font-size: 0.9rem;
+            font-size: 0.95em; /* Slightly larger note */
             color: var(--text-color-light);
-            margin-bottom: 30px;
-            font-style: italic;
-            background: #f8fafc;
-            padding: 10px;
-            border-radius: 8px;
+            margin-bottom: 25px;
+            background-color: #fff9e6; /* Light yellow background */
+            padding: 8px 12px;
+            border-radius: 4px;
+            border: 1px solid #ffeccc;
         }
 
+
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         label {
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             font-weight: 600;
-            color: var(--text-color);
-            font-size: 1rem;
+            color: var(--text-color-light);
+            font-size: 0.95em;
         }
+        /* Style for notes below inputs */
+        .form-group small {
+            display: block;
+            font-size: 0.8em;
+            color: var(--note-color);
+            margin-top: 4px;
+            line-height: 1.3;
+        }
+
 
         input[type="number"],
         input[type="text"] {
             width: 100%;
-            padding: 14px 16px;
+            padding: 12px 15px;
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 1rem;
-            background: #f9fafb;
-            transition: all var(--transition-speed) ease;
+            border-radius: 6px;
+            font-size: 1em;
+            transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
         }
 
         input[type="number"]:focus,
         input[type="text"]:focus {
             outline: none;
             border-color: var(--primary-color);
-            box-shadow: 0 0 0 4px rgba(255, 98, 0, 0.15);
-            background: var(--white);
+            box-shadow: 0 0 0 3px rgba(238, 77, 45, 0.15);
         }
 
-        input[type="checkbox"] {
-            margin-right: 10px;
-            width: 18px;
-            height: 18px;
+         input[type="checkbox"] {
+            margin-right: 8px;
+            vertical-align: middle;
+            width: 16px;
+            height: 16px;
             accent-color: var(--primary-color);
-            cursor: pointer;
         }
 
         .checkbox-label {
             display: inline-flex;
             align-items: center;
-            font-weight: 500;
+            font-weight: normal;
             color: var(--text-color-light);
             cursor: pointer;
-            font-size: 0.95rem;
+            user-select: none;
+            margin-bottom: 0;
         }
+         .checkbox-label span {
+             line-height: 1.2;
+         }
 
         button {
+            display: block;
             width: 100%;
-            padding: 16px;
-            background: linear-gradient(45deg, var(--primary-color), var(--primary-color-dark));
+            padding: 14px;
+            background-color: var(--primary-color);
             color: var(--white);
             border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
+            border-radius: 6px;
+            font-size: 1.1em;
             font-weight: 600;
             cursor: pointer;
-            transition: all var(--transition-speed) ease;
-            margin-top: 20px;
+            transition: background-color var(--transition-speed) ease, transform 0.1s ease;
+            margin-top: 25px;
         }
 
         button:hover {
-            background: linear-gradient(45deg, var(--primary-color-dark), var(--primary-color));
-            transform: translateY(-2px);
+            background-color: var(--primary-color-dark);
         }
-
         button:active {
             transform: scale(0.98);
         }
 
+        /* --- Direct Result Area Styling --- */
         #ketQuaTrucTiep {
-            margin-top: 30px;
-            padding: 20px;
-            border-radius: 10px;
-            background: #f9fafb;
+            margin-top: 25px;
+            padding: 15px 20px;
+            border-radius: var(--border-radius);
+            background-color: var(--background-color);
             border: 1px solid var(--border-color);
+            min-height: 2.5em;
             text-align: center;
-            font-size: 1.2rem;
-            font-weight: 600;
-            transition: all var(--transition-speed) ease;
+            font-size: 1.1em;
+            line-height: 1.5;
         }
 
         #ketQuaTrucTiep.result-positive {
-            background: #ecfdf5;
+            background-color: #f0fff4;
             border-color: var(--success-color);
-            color: var(--success-color);
         }
-
         #ketQuaTrucTiep.result-negative {
-            background: #fef2f2;
+            background-color: #fff5f5;
             border-color: var(--error-color);
-            color: var(--error-color);
         }
-
         #ketQuaTrucTiep.result-zero {
-            background: #fff7ed;
+             background-color: #fffcf0;
             border-color: var(--warning-color);
-            color: var(--warning-color);
         }
 
+        /* Color classes for the profit/loss number */
         .positive { color: var(--success-color); font-weight: 700; }
         .negative { color: var(--error-color); font-weight: 700; }
         .zero { color: var(--warning-color); font-weight: 700; }
 
         .error {
             color: var(--error-color);
-            font-size: 0.85rem;
-            margin-top: 8px;
+            font-size: 0.85em;
+            margin-top: 5px;
             min-height: 1.2em;
         }
 
+        /* Footer Styling */
         footer {
             text-align: center;
-            padding: 20px;
+            padding: 20px 15px;
             margin-top: auto;
             width: 100%;
-            font-size: 0.9rem;
+            font-size: 0.9em;
             color: var(--text-color-footer);
         }
+        footer p { margin-bottom: 8px; }
+        footer a { color: var(--primary-color); text-decoration: none; transition: color var(--transition-speed) ease; }
+        footer a:hover { color: var(--primary-color-dark); text-decoration: underline; }
 
-        footer a {
-            color: var(--primary-color);
-            text-decoration: none;
-            transition: color var(--transition-speed) ease;
-        }
-
-        footer a:hover {
-            color: var(--primary-color-dark);
-            text-decoration: underline;
-        }
     </style>
 </head>
 <body>
+
 <div class="container">
     <h1>Công Cụ Tính Lợi Nhuận Shopee</h1>
-    <p class="luu-y">Lưu ý: Chi phí trừ đi chưa bao gồm phí vận hành, kho bãi, nhân sự, đóng gói...</p>
+    <!-- === UPDATED NOTE === -->
+    <p class="luu-y">Lưu ý: Đã bao gồm các chi phí cố định trên sàn. Nhập thêm các chi phí biến động khác (nếu có) vào các ô bên dưới để tính chính xác hơn.</p>
 
     <div class="form-group">
         <label for="giaNhap">Giá Nhập (VNĐ)</label>
@@ -235,22 +231,54 @@
         <div class="error" id="errorGiaBan"></div>
     </div>
 
+     <div class="form-group">
+         <label class="checkbox-label" for="isMall">
+             <input type="checkbox" id="isMall">
+             <span>Gian hàng là Shopee Mall (+3% phí cố định)</span>
+         </label>
+    </div>
+
+    <hr style="border: none; border-top: 1px solid #eee; margin: 25px 0;">
+    <h2 style="font-size: 1.2em; color: var(--primary-color); margin-bottom: 15px; text-align: center;">Chi Phí Marketing (% trên Giá Bán)</h2>
+
     <div class="form-group">
-        <label for="phanTramQuangCao">% Quảng Cáo (trên Giá Bán)</label>
-        <input type="number" id="phanTramQuangCao" placeholder="Ví dụ: 18" step="0.1" required>
+        <label for="phanTramQuangCao">% Quảng cáo Shopee (Ads)</label>
+        <input type="number" id="phanTramQuangCao" placeholder="Ví dụ: 18" step="0.1" value="0" required>
         <div class="error" id="errorQuangCao"></div>
+        <small>Chi phí chạy QC Đấu thầu từ khóa, Khám phá... (VAT 10% sẽ được tính thêm trên chi phí này).</small>
     </div>
 
     <div class="form-group">
-        <label class="checkbox-label" for="isMall">
-            <input type="checkbox" id="isMall">
-            <span>Gian hàng là Shopee Mall </span>
-        </label>
+        <label for="phanTramAffiliate">% Affiliate / Tiếp thị liên kết</label>
+        <input type="number" id="phanTramAffiliate" placeholder="Ví dụ: 15" step="0.1" value="0" required>
+        <div class="error" id="errorAffiliate"></div>
+        <small>Chi phí trả cho KOLs, KOCs, Affiliate Program của Shopee hoặc bên thứ ba.</small>
     </div>
+
+    <div class="form-group">
+        <label for="phanTramVoucher">% Voucher / Khuyến mãi</label>
+        <input type="number" id="phanTramVoucher" placeholder="Ví dụ: 5" step="0.1" value="0" required>
+        <div class="error" id="errorVoucher"></div>
+        <small>Tổng chi phí bạn chịu cho Voucher (do bạn tạo/Freeship Xtra/Voucher Xtra), Flash Sale, Combo...</small>
+    </div>
+
+    <div class="form-group">
+        <label for="phanTramMktKhac">% Chi phí MKT khác</label>
+        <input type="number" id="phanTramMktKhac" placeholder="Ví dụ: 3" step="0.1" value="0" required>
+        <div class="error" id="errorMktKhac"></div>
+        <small>Gom các chi phí MKT khác như: booking live, content, ngoại sàn, quà tặng...</small>
+    </div>
+
+    <hr style="border: none; border-top: 1px solid #eee; margin: 25px 0;">
+
 
     <button id="tinhToanBtn">Tính Lợi Nhuận</button>
 
-    <div id="ketQuaTrucTiep"></div>
+    <!-- === RESULT AREA === -->
+    <div id="ketQuaTrucTiep">
+        <!-- Kết quả sẽ được hiển thị ở đây -->
+    </div>
+
 </div>
 
 <footer>
@@ -261,23 +289,33 @@
     </p>
 </footer>
 
-<script>
+<script defer>
+    // Input Elements
     const giaNhapInput = document.getElementById('giaNhap');
     const giaBanInput = document.getElementById('giaBan');
-    const phanTramQuangCaoInput = document.getElementById('phanTramQuangCao');
     const isMallCheckbox = document.getElementById('isMall');
+    const phanTramQuangCaoInput = document.getElementById('phanTramQuangCao');
+    const phanTramAffiliateInput = document.getElementById('phanTramAffiliate');
+    const phanTramVoucherInput = document.getElementById('phanTramVoucher');
+    const phanTramMktKhacInput = document.getElementById('phanTramMktKhac');
     const tinhToanBtn = document.getElementById('tinhToanBtn');
-    const ketQuaTrucTiepDiv = document.getElementById('ketQuaTrucTiep');
 
+    // Result & Error Elements
+    const ketQuaTrucTiepDiv = document.getElementById('ketQuaTrucTiep');
     const errorGiaNhap = document.getElementById('errorGiaNhap');
     const errorGiaBan = document.getElementById('errorGiaBan');
     const errorQuangCao = document.getElementById('errorQuangCao');
+    const errorAffiliate = document.getElementById('errorAffiliate');
+    const errorVoucher = document.getElementById('errorVoucher');
+    const errorMktKhac = document.getElementById('errorMktKhac');
 
-    const TYLE_PHI_CO_DINH = 0.10;
-    const TYLE_PHI_THANH_TOAN = 0.05;
-    const TYLE_THUE = 0.015;
-    const TYLE_PHI_MALL = 0.03;
-    const TYLE_VAT_QUANG_CAO = 0.10;
+    // --- Cost Rates (Sàn cố định) ---
+    const TYLE_PHI_CO_DINH = 0.10;      // 10% Phí Cố Định sàn (Non-Mall)
+    const TYLE_PHI_THANH_TOAN = 0.05;   // 5% Phí Thanh Toán
+    const TYLE_THUE = 0.015;           // 1.5% Thuế
+    const TYLE_PHI_MALL_ADDITIONAL = 0.03; // 3% Phí Mall (phần cộng thêm nếu là Mall)
+    const TYLE_VAT_QUANG_CAO = 0.10;   // 10% VAT trên Chi Phí Quảng Cáo Shopee
+    // ------------------------------------
 
     function formatCurrency(value) {
         const numValue = Number(value);
@@ -286,43 +324,91 @@
     }
 
     function tinhLoiNhuan() {
+        // 1. Clear previous errors and reset result area
         errorGiaNhap.textContent = '';
         errorGiaBan.textContent = '';
         errorQuangCao.textContent = '';
+        errorAffiliate.textContent = '';
+        errorVoucher.textContent = '';
+        errorMktKhac.textContent = '';
         ketQuaTrucTiepDiv.innerHTML = '';
-        ketQuaTrucTiepDiv.className = '';
+        ketQuaTrucTiepDiv.className = ''; // Reset classes
 
+        // 2. Get input values (default to 0 if empty/invalid)
         const giaNhap = parseFloat(giaNhapInput.value) || 0;
         const giaBan = parseFloat(giaBanInput.value) || 0;
         const phanTramQuangCao = parseFloat(phanTramQuangCaoInput.value) || 0;
+        const phanTramAffiliate = parseFloat(phanTramAffiliateInput.value) || 0;
+        const phanTramVoucher = parseFloat(phanTramVoucherInput.value) || 0;
+        const phanTramMktKhac = parseFloat(phanTramMktKhacInput.value) || 0;
         const isMall = isMallCheckbox.checked;
 
+        // 3. Validate Input
         let isValid = true;
+        // Check for empty or invalid numbers AND negative values
         if (giaNhapInput.value.trim() === '' || isNaN(parseFloat(giaNhapInput.value)) || giaNhap < 0) {
-            errorGiaNhap.textContent = 'Vui lòng nhập giá nhập hợp lệ (số không âm).';
+            errorGiaNhap.textContent = 'Giá nhập phải là số không âm.';
             isValid = false;
         }
         if (giaBanInput.value.trim() === '' || isNaN(parseFloat(giaBanInput.value)) || giaBan <= 0) {
-            errorGiaBan.textContent = 'Vui lòng nhập giá bán hợp lệ (số dương).';
+            errorGiaBan.textContent = 'Giá bán phải là số dương.';
             isValid = false;
         }
         if (phanTramQuangCaoInput.value.trim() === '' || isNaN(parseFloat(phanTramQuangCaoInput.value)) || phanTramQuangCao < 0) {
-            errorQuangCao.textContent = 'Vui lòng nhập % quảng cáo hợp lệ (số không âm).';
-            isValid = false;
+            errorQuangCao.textContent = '% Quảng cáo Shopee phải là số không âm.';
+             // Mark invalid even if 0 was defaulted, if original input was bad
+            if (phanTramQuangCaoInput.value.trim() !== '0' && phanTramQuangCaoInput.value.trim() !== '') isValid = false;
+        }
+        if (phanTramAffiliateInput.value.trim() === '' || isNaN(parseFloat(phanTramAffiliateInput.value)) || phanTramAffiliate < 0) {
+             errorAffiliate.textContent = '% Affiliate phải là số không âm.';
+             if (phanTramAffiliateInput.value.trim() !== '0' && phanTramAffiliateInput.value.trim() !== '') isValid = false;
+        }
+         if (phanTramVoucherInput.value.trim() === '' || isNaN(parseFloat(phanTramVoucherInput.value)) || phanTramVoucher < 0) {
+             errorVoucher.textContent = '% Voucher/KM phải là số không âm.';
+             if (phanTramVoucherInput.value.trim() !== '0' && phanTramVoucherInput.value.trim() !== '') isValid = false;
+        }
+         if (phanTramMktKhacInput.value.trim() === '' || isNaN(parseFloat(phanTramMktKhacInput.value)) || phanTramMktKhac < 0) {
+            errorMktKhac.textContent = '% MKT khác phải là số không âm.';
+             if (phanTramMktKhacInput.value.trim() !== '0' && phanTramMktKhacInput.value.trim() !== '') isValid = false;
         }
 
-        if (!isValid) { return; }
 
+        if (!isValid) {
+            return; // Stop calculation
+        }
+
+        // --- Calculations ---
+        // 4. Calculate Platform Costs
         const phiCoDinh = giaBan * TYLE_PHI_CO_DINH;
         const phiThanhToan = giaBan * TYLE_PHI_THANH_TOAN;
         const thue = giaBan * TYLE_THUE;
-        const phiMall = isMall ? giaBan * TYLE_PHI_MALL : 0;
+        const phiMall = isMall ? giaBan * TYLE_PHI_MALL_ADDITIONAL : 0; // Chỉ tính phần cộng thêm
+
+        // 5. Calculate Marketing Costs
         const chiPhiQuangCao = giaBan * (phanTramQuangCao / 100);
-        const vatQuangCao = chiPhiQuangCao * TYLE_VAT_QUANG_CAO;
-        const tongChiPhiTruGiaNhap = phiCoDinh + phiThanhToan + thue + phiMall + chiPhiQuangCao + vatQuangCao;
+        const vatQuangCao = chiPhiQuangCao * TYLE_VAT_QUANG_CAO; // VAT only on Shopee Ads cost
+        const chiPhiAffiliate = giaBan * (phanTramAffiliate / 100);
+        const chiPhiVoucher = giaBan * (phanTramVoucher / 100);
+        const chiPhiMktKhac = giaBan * (phanTramMktKhac / 100);
+
+        // 6. Calculate Total Costs (excluding cost price)
+        const tongChiPhiTruGiaNhap =
+            phiCoDinh +
+            phiThanhToan +
+            thue +
+            phiMall +           // Mall additional fee
+            chiPhiQuangCao +    // Shopee Ads cost
+            vatQuangCao +       // VAT on Shopee Ads
+            chiPhiAffiliate +   // Affiliate cost
+            chiPhiVoucher +     // Voucher/Promo cost
+            chiPhiMktKhac;      // Other MKT cost
+
         const tongChiPhiBaoGomGiaGoc = tongChiPhiTruGiaNhap + giaNhap;
+
+        // 7. Calculate Profit
         const loiNhuan = giaBan - tongChiPhiBaoGomGiaGoc;
 
+        // 8. Prepare and Display Result Directly
         let resultHTML = '';
         let resultClass = '';
         let colorClass = '';
@@ -345,7 +431,22 @@
         ketQuaTrucTiepDiv.innerHTML = resultHTML;
     }
 
+    // --- Attach event listener ---
     tinhToanBtn.addEventListener('click', tinhLoiNhuan);
+
+    // Optional: Trigger calculation on Enter key press in number fields
+    const numberInputs = document.querySelectorAll('input[type="number"]');
+    numberInputs.forEach(input => {
+        input.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Prevent default form submission
+                tinhToanBtn.click(); // Trigger the button click
+            }
+        });
+    });
+
+
 </script>
+
 </body>
 </html>
