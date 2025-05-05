@@ -51,7 +51,7 @@
             padding: 30px 35px;
             border-radius: var(--border-radius);
             box-shadow: var(--box-shadow);
-            max-width: 550px; /* Wider for more fields */
+            max-width: 550px;
             width: 100%;
             margin-top: 30px;
             margin-bottom: 30px;
@@ -65,18 +65,16 @@
             font-size: 1.8em;
         }
 
-        /* Updated note style */
         .luu-y {
             text-align: center;
-            font-size: 0.95em; /* Slightly larger note */
+            font-size: 0.95em;
             color: var(--text-color-light);
             margin-bottom: 25px;
-            background-color: #fff9e6; /* Light yellow background */
+            background-color: #fff9e6;
             padding: 8px 12px;
             border-radius: 4px;
             border: 1px solid #ffeccc;
         }
-
 
         .form-group {
             margin-bottom: 20px;
@@ -84,20 +82,21 @@
 
         label {
             display: block;
-            margin-bottom: 8px;
+            /* Remove bottom margin if note is directly below */
+            margin-bottom: 3px;
             font-weight: 600;
             color: var(--text-color-light);
             font-size: 0.95em;
         }
-        /* Style for notes below inputs */
+        /* Style for notes below labels, ABOVE inputs */
         .form-group small {
             display: block;
             font-size: 0.8em;
             color: var(--note-color);
-            margin-top: 4px;
+            /* Add margin below the note to space it from the input */
+            margin-bottom: 8px;
             line-height: 1.3;
         }
-
 
         input[type="number"],
         input[type="text"] {
@@ -216,17 +215,18 @@
 
 <div class="container">
     <h1>Công Cụ Tính Lợi Nhuận Shopee</h1>
-    <!-- === UPDATED NOTE === -->
     <p class="luu-y">Lưu ý: Đã bao gồm các chi phí cố định trên sàn. Nhập thêm các chi phí biến động khác (nếu có) vào các ô bên dưới để tính chính xác hơn.</p>
 
     <div class="form-group">
         <label for="giaNhap">Giá Nhập (VNĐ)</label>
+        <!-- Note removed from here -->
         <input type="number" id="giaNhap" placeholder="Ví dụ: 29700" required>
         <div class="error" id="errorGiaNhap"></div>
     </div>
 
     <div class="form-group">
         <label for="giaBan">Giá Bán Shopee (VNĐ)</label>
+         <!-- Note removed from here -->
         <input type="number" id="giaBan" placeholder="Ví dụ: 89000" required>
         <div class="error" id="errorGiaBan"></div>
     </div>
@@ -234,8 +234,9 @@
      <div class="form-group">
          <label class="checkbox-label" for="isMall">
              <input type="checkbox" id="isMall">
-             <span>Gian hàng là Shopee Mall </span>
+             <span>Gian hàng là Shopee Mall (+3% phí cố định)</span>
          </label>
+         <!-- No note needed here -->
     </div>
 
     <hr style="border: none; border-top: 1px solid #eee; margin: 25px 0;">
@@ -243,30 +244,34 @@
 
     <div class="form-group">
         <label for="phanTramQuangCao">% Quảng cáo Shopee (Ads)</label>
+        <!-- Moved note up -->
+        <small>Chi phí chạy QC Đấu thầu từ khóa, Khám phá... (VAT 10% sẽ được tính thêm trên chi phí này).</small>
         <input type="number" id="phanTramQuangCao" placeholder="Ví dụ: 18" step="0.1" value="0" required>
         <div class="error" id="errorQuangCao"></div>
-        <small>Chi phí chạy QC Đấu thầu từ khóa, Khám phá... (VAT 10% sẽ được tính thêm trên chi phí này).</small>
     </div>
 
     <div class="form-group">
         <label for="phanTramAffiliate">% Affiliate / Tiếp thị liên kết</label>
+         <!-- Moved note up -->
+        <small>Chi phí trả cho KOLs, KOCs, Affiliate Program của Shopee hoặc bên thứ ba.</small>
         <input type="number" id="phanTramAffiliate" placeholder="Ví dụ: 15" step="0.1" value="0" required>
         <div class="error" id="errorAffiliate"></div>
-        <small>Chi phí trả cho KOLs, KOCs, Affiliate Program của Shopee hoặc bên thứ ba.</small>
     </div>
 
     <div class="form-group">
         <label for="phanTramVoucher">% Voucher / Khuyến mãi</label>
+         <!-- Moved note up -->
+        <small>Tổng chi phí bạn chịu cho Voucher (do bạn tạo/Freeship Xtra/Voucher Xtra), Flash Sale, Combo...</small>
         <input type="number" id="phanTramVoucher" placeholder="Ví dụ: 5" step="0.1" value="0" required>
         <div class="error" id="errorVoucher"></div>
-        <small>Tổng chi phí bạn chịu cho Voucher (do bạn tạo/Freeship Xtra/Voucher Xtra), Flash Sale, Combo...</small>
     </div>
 
     <div class="form-group">
         <label for="phanTramMktKhac">% Chi phí MKT khác</label>
+         <!-- Moved note up -->
+        <small>Gom các chi phí MKT khác như: booking live, content, ngoại sàn, quà tặng...</small>
         <input type="number" id="phanTramMktKhac" placeholder="Ví dụ: 3" step="0.1" value="0" required>
         <div class="error" id="errorMktKhac"></div>
-        <small>Gom các chi phí MKT khác như: booking live, content, ngoại sàn, quà tặng...</small>
     </div>
 
     <hr style="border: none; border-top: 1px solid #eee; margin: 25px 0;">
@@ -290,7 +295,8 @@
 </footer>
 
 <script defer>
-    // Input Elements
+    // --- JavaScript code remains the same as the previous version ---
+     // Input Elements
     const giaNhapInput = document.getElementById('giaNhap');
     const giaBanInput = document.getElementById('giaBan');
     const isMallCheckbox = document.getElementById('isMall');
@@ -310,11 +316,11 @@
     const errorMktKhac = document.getElementById('errorMktKhac');
 
     // --- Cost Rates (Sàn cố định) ---
-    const TYLE_PHI_CO_DINH = 0.10;      // 10% Phí Cố Định sàn (Non-Mall)
-    const TYLE_PHI_THANH_TOAN = 0.05;   // 5% Phí Thanh Toán
-    const TYLE_THUE = 0.015;           // 1.5% Thuế
-    const TYLE_PHI_MALL_ADDITIONAL = 0.03; // 3% Phí Mall (phần cộng thêm nếu là Mall)
-    const TYLE_VAT_QUANG_CAO = 0.10;   // 10% VAT trên Chi Phí Quảng Cáo Shopee
+    const TYLE_PHI_CO_DINH = 0.10;
+    const TYLE_PHI_THANH_TOAN = 0.05;
+    const TYLE_THUE = 0.015;
+    const TYLE_PHI_MALL_ADDITIONAL = 0.03;
+    const TYLE_VAT_QUANG_CAO = 0.10;
     // ------------------------------------
 
     function formatCurrency(value) {
@@ -332,9 +338,9 @@
         errorVoucher.textContent = '';
         errorMktKhac.textContent = '';
         ketQuaTrucTiepDiv.innerHTML = '';
-        ketQuaTrucTiepDiv.className = ''; // Reset classes
+        ketQuaTrucTiepDiv.className = '';
 
-        // 2. Get input values (default to 0 if empty/invalid)
+        // 2. Get input values
         const giaNhap = parseFloat(giaNhapInput.value) || 0;
         const giaBan = parseFloat(giaBanInput.value) || 0;
         const phanTramQuangCao = parseFloat(phanTramQuangCaoInput.value) || 0;
@@ -345,7 +351,6 @@
 
         // 3. Validate Input
         let isValid = true;
-        // Check for empty or invalid numbers AND negative values
         if (giaNhapInput.value.trim() === '' || isNaN(parseFloat(giaNhapInput.value)) || giaNhap < 0) {
             errorGiaNhap.textContent = 'Giá nhập phải là số không âm.';
             isValid = false;
@@ -355,9 +360,8 @@
             isValid = false;
         }
         if (phanTramQuangCaoInput.value.trim() === '' || isNaN(parseFloat(phanTramQuangCaoInput.value)) || phanTramQuangCao < 0) {
-            errorQuangCao.textContent = '% Quảng cáo Shopee phải là số không âm.';
-             // Mark invalid even if 0 was defaulted, if original input was bad
-            if (phanTramQuangCaoInput.value.trim() !== '0' && phanTramQuangCaoInput.value.trim() !== '') isValid = false;
+            errorQuangCao.textContent = '% QC Shopee phải là số không âm.';
+             if (phanTramQuangCaoInput.value.trim() !== '0' && phanTramQuangCaoInput.value.trim() !== '') isValid = false;
         }
         if (phanTramAffiliateInput.value.trim() === '' || isNaN(parseFloat(phanTramAffiliateInput.value)) || phanTramAffiliate < 0) {
              errorAffiliate.textContent = '% Affiliate phải là số không âm.';
@@ -372,47 +376,26 @@
              if (phanTramMktKhacInput.value.trim() !== '0' && phanTramMktKhacInput.value.trim() !== '') isValid = false;
         }
 
-
-        if (!isValid) {
-            return; // Stop calculation
-        }
+        if (!isValid) { return; }
 
         // --- Calculations ---
-        // 4. Calculate Platform Costs
         const phiCoDinh = giaBan * TYLE_PHI_CO_DINH;
         const phiThanhToan = giaBan * TYLE_PHI_THANH_TOAN;
         const thue = giaBan * TYLE_THUE;
-        const phiMall = isMall ? giaBan * TYLE_PHI_MALL_ADDITIONAL : 0; // Chỉ tính phần cộng thêm
-
-        // 5. Calculate Marketing Costs
+        const phiMall = isMall ? giaBan * TYLE_PHI_MALL_ADDITIONAL : 0;
         const chiPhiQuangCao = giaBan * (phanTramQuangCao / 100);
-        const vatQuangCao = chiPhiQuangCao * TYLE_VAT_QUANG_CAO; // VAT only on Shopee Ads cost
+        const vatQuangCao = chiPhiQuangCao * TYLE_VAT_QUANG_CAO;
         const chiPhiAffiliate = giaBan * (phanTramAffiliate / 100);
         const chiPhiVoucher = giaBan * (phanTramVoucher / 100);
         const chiPhiMktKhac = giaBan * (phanTramMktKhac / 100);
-
-        // 6. Calculate Total Costs (excluding cost price)
-        const tongChiPhiTruGiaNhap =
-            phiCoDinh +
-            phiThanhToan +
-            thue +
-            phiMall +           // Mall additional fee
-            chiPhiQuangCao +    // Shopee Ads cost
-            vatQuangCao +       // VAT on Shopee Ads
-            chiPhiAffiliate +   // Affiliate cost
-            chiPhiVoucher +     // Voucher/Promo cost
-            chiPhiMktKhac;      // Other MKT cost
-
+        const tongChiPhiTruGiaNhap = phiCoDinh + phiThanhToan + thue + phiMall + chiPhiQuangCao + vatQuangCao + chiPhiAffiliate + chiPhiVoucher + chiPhiMktKhac;
         const tongChiPhiBaoGomGiaGoc = tongChiPhiTruGiaNhap + giaNhap;
-
-        // 7. Calculate Profit
         const loiNhuan = giaBan - tongChiPhiBaoGomGiaGoc;
 
-        // 8. Prepare and Display Result Directly
+        // --- Display Result ---
         let resultHTML = '';
         let resultClass = '';
         let colorClass = '';
-
         if (loiNhuan > 0) {
             resultClass = 'result-positive';
             colorClass = 'positive';
@@ -426,26 +409,21 @@
             colorClass = 'zero';
             resultHTML = `Hòa vốn ước tính: <span class="${colorClass}">${formatCurrency(loiNhuan)}</span> VNĐ`;
         }
-
         ketQuaTrucTiepDiv.classList.add(resultClass);
         ketQuaTrucTiepDiv.innerHTML = resultHTML;
     }
 
-    // --- Attach event listener ---
+    // --- Attach event listeners ---
     tinhToanBtn.addEventListener('click', tinhLoiNhuan);
-
-    // Optional: Trigger calculation on Enter key press in number fields
     const numberInputs = document.querySelectorAll('input[type="number"]');
     numberInputs.forEach(input => {
         input.addEventListener('keypress', function(event) {
             if (event.key === 'Enter') {
-                event.preventDefault(); // Prevent default form submission
-                tinhToanBtn.click(); // Trigger the button click
+                event.preventDefault();
+                tinhToanBtn.click();
             }
         });
     });
-
-
 </script>
 
 </body>
